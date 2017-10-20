@@ -7,7 +7,7 @@ class Broadcast:
         self.connected_clients = connected_clients_
         self.message_to_broadcast = message_from_client_
 
-    def Run(self):
+    def run(self):
         while True:
             message_to_broadcast = self.message_to_broadcast
             for client in self.connected_clients:
