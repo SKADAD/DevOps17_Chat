@@ -5,7 +5,8 @@ class SendServer:
         threading.Thread.__init__(self)
         self.client_socket = client_socket_
         self.message_to_all = message_to_all_
-    def Run(self):
+
+    def run(self):
         while True:
             message_from_server = self.message_to_all
             self.client_socket.send(str.encode(message_from_server))
