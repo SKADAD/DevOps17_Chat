@@ -4,12 +4,12 @@ from ServerSendClass import SendServer
 
 main_server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
-main_server_socket.bind = (('',9999))
+main_server_socket.bind(('',9999))
 main_server_socket.listen()
 
 connected_clients = []
-message = input()
-send_to_all = SendServer(connected_clients,message)
+
+send_to_all = SendServer(connected_clients)
 send_to_all.start()
 
 while True:
