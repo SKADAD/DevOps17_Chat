@@ -15,6 +15,7 @@ class ServerGuiDesign:
 
     def fram(self):
         print("Hello world")
+        print ("Hello")
 
 
 
