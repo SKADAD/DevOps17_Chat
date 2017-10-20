@@ -1,3 +1,16 @@
 # DevOps17_Chat
 
-Testar detta lite mer ba
+              School Project for Python Programming course.
+                Chat software with client and server GUI.
+
+
+
+
+
+
+                            Programmed by
+                    Nabil Laamrani - @SKADAD
+                    Jens Båvenmark - @Hemme02
+                    Peter Brymér - @Pettingbror
+                    Kim Ericsson - @KimThoamsEriksson
+
