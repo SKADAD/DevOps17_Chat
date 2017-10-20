@@ -1,7 +1,7 @@
 import threading
-from BroadcastClass import Broadcast
+from ServerBroadcastClass import Broadcast
 
-class ReceiveServer:
+class ReceiveServer(threading.Thread):
     def __init__(self,client_socket_,connected_clients_):
         threading.Thread.__init__(self)
         self.client_socket = client_socket_
