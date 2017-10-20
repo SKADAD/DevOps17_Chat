@@ -13,7 +13,8 @@ class ServerGuiDesign:
         #Function to start
         self.root.mainloop()
 
-
+    def fram(self):
+        print("Hello world")
 
 
 
