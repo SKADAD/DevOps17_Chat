@@ -8,7 +8,5 @@ class Broadcast(threading.Thread):
         self.message_to_broadcast = message_from_client_
 
     def run(self):
-        while True:
-            message_to_broadcast = self.message_to_broadcast
-            for client in self.connected_clients:
-                client.send(str.encode(message_to_broadcast))
+         for client in self.connected_clients:
+            client.send(str.encode(self.message_to_broadcast))

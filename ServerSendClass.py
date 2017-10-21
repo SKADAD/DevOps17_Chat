@@ -1,13 +1,13 @@
 import threading
 
 class SendServer(threading.Thread):
-    def __init__(self,client_socket_):
+    def __init__(self,connected_clients_):
         threading.Thread.__init__(self)
-        self.client_socket = client_socket_
-        self.message_to_all = input("Skriv något till alla: ")
+        self.connected_clients = connected_clients_
 
     def run(self):
         while True:
-            message_from_server = self.message_to_all
-            for client in self.client_socket:
-                client.send(str.encode("Message from server "+message_from_server))
+            message_to_all = input()
+            for client in self.connected_clients:
+                client.send(str.encode("Message from server: "+message_to_all))
+            print(message_to_all)
