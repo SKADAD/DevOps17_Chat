@@ -24,3 +24,8 @@ class ClientBackend:
         sender = Sender(self.client,"TA BORT DETTA SEN!!").start()
         print("Connection established")
 
+
+
+##Test objekt till klassen ska bort i finalrelease
+test=ClientBackend('127.0.0.1',9999,"Tets")
+test.start()
