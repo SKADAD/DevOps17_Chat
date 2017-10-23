@@ -28,9 +28,8 @@ class ServerBackend:
         send_to_all.start()
 
     def server_receive(self, client_socket, connected_clients):
-        while True:
-            receive_from_client = ReceiveServer(client_socket, connected_clients)
-            receive_from_client.start()
+
+        receive_from_client = ReceiveServer(client_socket, connected_clients).start()
 
 
 # trying the class
