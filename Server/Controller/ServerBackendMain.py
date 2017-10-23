@@ -1,5 +1,4 @@
 import socket
-
 from Server.Controller.ServerReceiveClass import ReceiveServer
 from Server.Controller.ServerSendClass import SendServer
 
@@ -24,14 +23,12 @@ class ServerBackend:
             self.server_receive(client_socket, self.connected_clients)
 
     def server_send(self):
-        send_to_all = SendServer(self.connected_clients)
-        send_to_all.start()
+        SendServer(self.connected_clients).start()
 
     def server_receive(self, client_socket, connected_clients):
-
-        receive_from_client = ReceiveServer(client_socket, connected_clients).start()
+        ReceiveServer(client_socket, connected_clients).start()
 
 
 # trying the class
-obj1 = ServerBackend('127.0.0.1', 9999)
+obj1 = ServerBackend('172.20.201.234', 9999)
 obj1.start()
