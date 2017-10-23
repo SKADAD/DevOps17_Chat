@@ -1,6 +1,7 @@
 import socket
-from ServerReceiveClass import ReceiveServer
-from ServerSendClass import SendServer
+
+from Server.Controller.ServerReceiveClass import ReceiveServer
+from Server.Controller.ServerSendClass import SendServer
 
 main_server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 

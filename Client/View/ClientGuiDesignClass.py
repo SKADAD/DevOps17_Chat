@@ -1,5 +1,7 @@
 import tkinter
-import ClientGuiFunctions
+
+from Client.View import ClientGuiFunctions
+
 
 class ClientGui:
 

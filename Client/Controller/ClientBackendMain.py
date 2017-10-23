@@ -1,6 +1,7 @@
 import socket
-from ClientReceiveClass import Receiver
-from ClientSendClass import Sender
+
+from Client.Controller.ClientReceiveClass import Receiver
+from Client.Controller.ClientSendClass import Sender
 
 client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
