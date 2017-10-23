@@ -9,5 +9,5 @@ class SendServer(threading.Thread):
         while True:
             message_to_all = input()
             for client in self.connected_clients:
-                client.send(str.encode("Message from server: "+message_to_all))
+                client.send(str.encode(message_to_all))
             print(message_to_all)
