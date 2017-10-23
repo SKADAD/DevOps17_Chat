@@ -1,15 +1,26 @@
 import socket
-
 from Client.Controller.ClientReceiveClass import Receiver
 from Client.Controller.ClientSendClass import Sender
 
-client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+class ClientBackend:
 
-client.connect(('127.0.0.1',9999))
-receiver = Receiver(client).start()
+    def __init__(self,server_ip_,server_port_,username_):
+        self.server_ip=server_ip_
+        self.server_port=server_port_
+        self.username=username_
+        self.client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
 
-message_to_send=input("Skriv något till server")
-sender = Sender(client,message_to_send).start()
+    def start (self):
 
-print("hello")
+        #Connect to server
+        self.client.connect((self.server_ip,self.server_port))
+
+        #Starting new thread to recive messages from server
+        receiver = Receiver(self.client).start()
+
+
+        # Starting new thread to send messages to server
+        sender = Sender(self.client,"TA BORT DETTA SEN!!").start()
+        print("Connection established")
+
