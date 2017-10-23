@@ -175,6 +175,7 @@ class ClientGui:
 			if message.isspace() or len(message) == 0:
 				self.input_window.delete('1.0', 'end')
 			else:
+				#ClientGuiFunctions.send_message()
 				ClientGuiFunctions.print_message_in_text_frame(message, self.chat_window)
 				self.input_window.delete('1.0', 'end')
 
