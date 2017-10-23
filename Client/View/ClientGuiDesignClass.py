@@ -5,16 +5,17 @@ from Client.View import ClientGuiFunctions
 
 class ClientGui:
 
-	def __init__(self, servers_ip_, servers_port_, user_name_, client_ip_, client_port_):
-		self.servers_ip = servers_ip_
-		self.servers_port = servers_port_
-		self.user_name = user_name_
-		self.client_ip = client_ip_
-		self.client_port = client_port_
+	def __init__(self):
+		self.servers_ip = None
+		self.servers_port = None
+		self.user_name = '1'
+		self.user_ip = '1'
+		self.user_port = '1'
 
 		self.root = tkinter.Tk()
+		self.create_ip_port_frame()
 		self.root.title('GONE CHAT')
-		self.root.iconbitmap(default='images/ikon.ico')
+		self.root.iconbitmap(default='../../images/ikon.ico')
 		self.root.configure(bg='white')
 		self.root.minsize(width=800, height=600)
 
@@ -59,6 +60,41 @@ class ClientGui:
 		self.bottom_frame_create()
 		self.root.mainloop()
 
+	def create_ip_port_frame(self):
+		def sub_func_set_ip_and_port():
+			self.servers_ip = ip_entry.get()
+			self.servers_port = int(port_entry.get())
+
+			connect_button.configure(state='disabled')
+			choose_ip_and_port_root.withdraw()
+			choose_ip_and_port_root.quit()
+
+			return True
+
+
+
+		choose_ip_and_port_root = tkinter.Toplevel()
+		choose_ip_and_port_root.transient(self.root)
+
+		top_label = tkinter.Label(choose_ip_and_port_root, text='Enter IP and Port of Server')
+		top_label.grid(row=0, column=0, columnspan=2)
+
+		ip_label = tkinter.Label(choose_ip_and_port_root, text='IP: ')
+		ip_entry = tkinter.Entry(choose_ip_and_port_root)
+
+		port_label = tkinter.Label(choose_ip_and_port_root, text='Port: ')
+		port_entry = tkinter.Entry(choose_ip_and_port_root)
+
+		ip_label.grid(row=1, column=0)
+		ip_entry.grid(row=1, column=1)
+		port_label.grid(row=2, column=0)
+		port_entry.grid(row=2, column=1)
+
+		connect_button = tkinter.Button(choose_ip_and_port_root, text='Connect', command=sub_func_set_ip_and_port)
+		connect_button.grid(row=3, column=0, columnspan=2)
+
+		choose_ip_and_port_root.mainloop()
+
 
 	def create_base_frames(self):
 
@@ -75,7 +111,7 @@ class ClientGui:
 
 
 	def top_left_frame_create(self):
-		logo_image = tkinter.PhotoImage(file='images/Gone_logo.png')
+		logo_image = tkinter.PhotoImage(file='../../images/Gone_logo.png')
 		logo_label = tkinter.Label(self.top_left_frame, image=logo_image, border=0, bg='white')
 		logo_label.image = logo_image
 		logo_label.grid(row=0, column=0, pady=15, sticky='w')
@@ -87,9 +123,9 @@ class ClientGui:
 		user_label = tkinter.Label(user_info_frame, text='Username: ', justify='left', bg = '#3d85c6', fg='white', font=(self.font, 12))
 		username_label = tkinter.Label(user_info_frame, text=self.user_name, bg = '#3d85c6', fg='white', font=(self.font, 12))
 		ip_label = tkinter.Label(user_info_frame, text='User IP: ', justify='left', bg = '#3d85c6', fg='white', font=(self.font, 12))
-		user_ip_label = tkinter.Label(user_info_frame, text=self.client_ip, bg = '#3d85c6', fg='white', font=(self.font, 12))
+		user_ip_label = tkinter.Label(user_info_frame, text=self.user_ip, bg = '#3d85c6', fg='white', font=(self.font, 12))
 		port_label = tkinter.Label(user_info_frame, text='User Port: ', justify='left', bg = '#3d85c6', fg='white', font=(self.font, 12))
-		user_port_label = tkinter.Label(user_info_frame, text=self.client_port, anchor='w', bg = '#3d85c6', fg='white', font=(self.font, 12))
+		user_port_label = tkinter.Label(user_info_frame, text=self.user_port, anchor='w', bg = '#3d85c6', fg='white', font=(self.font, 12))
 
 		user_label.grid(row=0, column=0, sticky='w', padx=10)
 		username_label.grid(row=0, column=1, sticky='w')
@@ -100,12 +136,12 @@ class ClientGui:
 		port_label.grid(row=2, column=0, sticky='w', padx=10)
 		user_port_label.grid(row=2, column=1, sticky='w')
 
-		properties_image = tkinter.PhotoImage(file='images/button_properties.png')
+		properties_image = tkinter.PhotoImage(file='../../images/button_properties.png')
 		change_userinfo_button = tkinter.Button(user_info_frame, image=properties_image, borderwidth=0, background='#3d85c6', activebackground='#3d85c6')
 		change_userinfo_button.image = properties_image
 		change_userinfo_button.grid(row=3, column=0, pady=(10, 0), padx=10)
 
-		log_out_image=tkinter.PhotoImage(file='images/button_log-out.png')
+		log_out_image=tkinter.PhotoImage(file='../../images/button_log-out.png')
 		log_out_button = tkinter.Button(user_info_frame, image=log_out_image, borderwidth=0, background='#3d85c6', activebackground='#3d85c6')
 		log_out_button.image = log_out_image
 		log_out_button.grid(row=3, column=1, pady=(10, 0))
@@ -200,13 +236,12 @@ class ClientGui:
 		input_window.configure(yscrollcommand=message_send_scrollbar.set)
 		message_send_scrollbar.config(command=input_window.yview)
 		'''
-		send_image = tkinter.PhotoImage(file='images/button_send.png')
+		send_image = tkinter.PhotoImage(file='../../images/button_send.png')
 		send_button = tkinter.Button(self.bottom_frame, image=send_image, command=get_message_from_input_window, borderwidth=0)
 		send_button.image = send_image
 		send_button.grid(row=1, column=0, sticky='e', padx=10, pady=10)
 
 # TODO - Dropdown for activeclientlist
 
-
-test = ClientGui('16', '16', 'Kim', '127.0.0.1', '5555')
+test = ClientGui()
 test.start()
