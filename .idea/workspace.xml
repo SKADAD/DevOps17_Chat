@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7ed99cd-538a-4129-b3d8-66b113d3972b" name="Default" comment="Added in ClientCommands if you send #connected Kim Nabil Jens Mr.Brymer it should add that to connected clients list in client GUI UNTESTED!">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Client/Controller/ClientMain.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Client/Controller/Main.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/DevOps17_Chat.iml" afterPath="$PROJECT_DIR$/.idea/DevOps17_Chat.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="b7ed99cd-538a-4129-b3d8-66b113d3972b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/Controller/ClientCommands.py" afterPath="$PROJECT_DIR$/Client/Controller/ClientCommands.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/Controller/ClientSendClass.py" afterPath="$PROJECT_DIR$/Client/Controller/ClientSendClass.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -564,7 +558,14 @@
       <option name="project" value="LOCAL" />
       <updated>1508762246626</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added in ClientCommands if you send #connected Kim Nabil Jens Mr.Brymer it should add that to connected clients list in client GUI &#10;UNTESTED!">
+      <created>1508841833988</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1508841833988</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -642,7 +643,8 @@
     <MESSAGE value="Added test object" />
     <MESSAGE value="Fixed an issue with server that made infinite threads" />
     <MESSAGE value="Updated server so it can recive commands from server in form of #" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated server so it can recive commands from server in form of #" />
+    <MESSAGE value="Added in ClientCommands if you send #connected Kim Nabil Jens Mr.Brymer it should add that to connected clients list in client GUI &#10;UNTESTED!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added in ClientCommands if you send #connected Kim Nabil Jens Mr.Brymer it should add that to connected clients list in client GUI &#10;UNTESTED!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
