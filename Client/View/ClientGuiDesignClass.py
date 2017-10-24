@@ -1,19 +1,19 @@
 import tkinter
+import tkinter.messagebox
 
 from Client.View import ClientGuiFunctions
 
 
 class ClientGui:
 
-	def __init__(self):
-		self.servers_ip = None
-		self.servers_port = None
+	def __init__(self, ip, port):
+		self.servers_ip = ip
+		self.servers_port = port
 		self.user_name = '1'
 		self.user_ip = '1'
 		self.user_port = '1'
 
 		self.root = tkinter.Tk()
-		self.create_ip_port_frame()
 		self.root.title('GONE CHAT')
 		self.root.iconbitmap(default='../../images/ikon.ico')
 		self.root.configure(bg='white')
@@ -52,48 +52,133 @@ class ClientGui:
 		self.list_of_active_users = ['Kim', 'Nabil','Peter']
 
 	def start(self):
+		# Start connection with server
 		self.create_base_frames()
 		self.top_left_frame_create()
 		self.top_right_frame_create()
 		self.center_left_frame_create()
 		self.center_right_frame_create()
 		self.bottom_frame_create()
+		self.log_in_frame()
 		self.root.mainloop()
 
-	def create_ip_port_frame(self):
-		def sub_func_set_ip_and_port():
-			self.servers_ip = ip_entry.get()
-			self.servers_port = int(port_entry.get())
+	def log_in_frame(self):
 
-			connect_button.configure(state='disabled')
-			choose_ip_and_port_root.withdraw()
-			choose_ip_and_port_root.quit()
+		def sub_func_get_name_and_code():
+			entered_login_name = log_in_name_entry.get()
+			entered_code = code_entry.get()
 
-			return True
+			if (len(entered_login_name) == 0 or len(entered_code) == 0) or (entered_login_name.isspace() or entered_code.isspace()):
+				tkinter.messagebox.showwarning(title='Error', message='Fields cant be empty')
+			else:
+				sub_func_log_in(entered_login_name, entered_code)
 
 
 
-		choose_ip_and_port_root = tkinter.Toplevel()
-		choose_ip_and_port_root.transient(self.root)
+		def sub_func_register():
+			def sub_sub_func_close_window():
+				register_toplevel.grab_release()
+				register_toplevel.withdraw()
+				register_toplevel.quit()
 
-		top_label = tkinter.Label(choose_ip_and_port_root, text='Enter IP and Port of Server')
+			def sub_sub_func_register_new_user():
+				entered_user_name = user_name_entry.get()
+				entered_user_nickname = nickname_entry.get()
+				entered_user_code = code_entry.get()
+				if (len(entered_user_name) == 0 or len(entered_user_nickname) == 0 or len(entered_user_code) == 0) or (entered_user_name.isspace() or entered_user_nickname.isspace() or entered_user_nickname.isspace()):
+					tkinter.messagebox.showwarning(title='Error', message='Fields cant be empty')
+				else:
+					result = ClientGuiFunctions.register_client_to_server(entered_user_name, entered_user_nickname, entered_user_code)
+					if result:
+						sub_func_log_in(entered_user_name, entered_user_code)
+
+					elif result == -1:
+						tkinter.messagebox.showwarning(title='Error', message='Account with username {} already exists'.format(entered_user_name))
+
+					elif result == -2:
+						tkinter.messagebox.showwarning(title='Error', message='That nickname is already taken')
+
+
+			register_toplevel = tkinter.Toplevel(log_in_toplevel)
+			register_toplevel.configure(bg='white')
+			register_toplevel.transient(log_in_toplevel)
+			register_toplevel.attributes('-topmost', 'true')
+			register_toplevel.grab_set()
+
+
+			top_label = tkinter.Label(register_toplevel, text='Enter IP and Port of Server', bg='white',
+									  font=('calibri', 10))
+			top_label.grid(row=0, column=0, columnspan=2)
+
+			user_name_label = tkinter.Label(register_toplevel, text='User name: ', bg='white', font=('calibri', 10))
+			user_name_entry = tkinter.Entry(register_toplevel, bg='lightgray')
+
+			nickname_label = tkinter.Label(register_toplevel, text='Nickname: ', bg='white', font=('calibri', 10))
+			nickname_entry = tkinter.Entry(register_toplevel, bg='lightgray')
+
+			code_label = tkinter.Label(register_toplevel, text='Code: ', bg='white', font=('calibri', 10))
+			code_entry = tkinter.Entry(register_toplevel, bg='lightgray')
+
+			user_name_label.grid(row=1, column=0)
+			user_name_entry.grid(row=1, column=1)
+			nickname_label.grid(row=2, column=0)
+			nickname_entry.grid(row=2, column=1)
+			code_label.grid(row=3, column=0)
+			code_entry.grid(row=3, column=1)
+
+			button_bottom_frame = tkinter.Frame(register_toplevel)
+			button_bottom_frame.grid(row=4, column=0, columnspan=2)
+
+			register_button = tkinter.Button(button_bottom_frame, text='Register', command=sub_sub_func_register_new_user)
+			register_button.grid(row=0, column=0, padx=10)
+			cancel_button = tkinter.Button(button_bottom_frame, text='Cancel', command=sub_sub_func_close_window)
+			cancel_button.grid(row=0, column=1)
+
+			register_toplevel.mainloop()
+
+		def sub_func_close_window():
+			close_program = tkinter.messagebox.askyesno(title='Close program', message='Closing this windows closes the program.\nDo you want to continue')
+			if close_program == True:
+				# close connection
+				self.root.destroy()
+
+		def sub_func_log_in(login_name, code):
+
+			# Check log in towards server
+
+			log_in_toplevel.grab_release()
+			log_in_toplevel.withdraw()
+			log_in_toplevel.quit()
+
+		log_in_toplevel = tkinter.Toplevel(self.root)
+		log_in_toplevel.transient(self.root)
+		log_in_toplevel.attributes('-topmost', 'true')
+		log_in_toplevel.grab_set()
+		log_in_toplevel.protocol('WM_DELETE_WINDOW', sub_func_close_window)
+
+		top_label = tkinter.Label(log_in_toplevel, text='Log in or register')
 		top_label.grid(row=0, column=0, columnspan=2)
 
-		ip_label = tkinter.Label(choose_ip_and_port_root, text='IP: ')
-		ip_entry = tkinter.Entry(choose_ip_and_port_root)
+		log_in_name_label = tkinter.Label(log_in_toplevel, text='IP: ')
+		log_in_name_entry = tkinter.Entry(log_in_toplevel)
 
-		port_label = tkinter.Label(choose_ip_and_port_root, text='Port: ')
-		port_entry = tkinter.Entry(choose_ip_and_port_root)
+		code_label = tkinter.Label(log_in_toplevel, text='Port: ')
+		code_entry = tkinter.Entry(log_in_toplevel)
 
-		ip_label.grid(row=1, column=0)
-		ip_entry.grid(row=1, column=1)
-		port_label.grid(row=2, column=0)
-		port_entry.grid(row=2, column=1)
+		log_in_name_label.grid(row=1, column=0)
+		log_in_name_entry.grid(row=1, column=1)
+		code_label.grid(row=2, column=0)
+		code_entry.grid(row=2, column=1)
 
-		connect_button = tkinter.Button(choose_ip_and_port_root, text='Connect', command=sub_func_set_ip_and_port)
-		connect_button.grid(row=3, column=0, columnspan=2)
+		button_bottom_frame= tkinter.Frame(log_in_toplevel)
+		button_bottom_frame.grid(row=3, column=0, columnspan=2)
 
-		choose_ip_and_port_root.mainloop()
+		connect_button = tkinter.Button(button_bottom_frame, text='Log in', command=sub_func_get_name_and_code)
+		connect_button.grid(row=0, column=0, padx=10)
+		register_button = tkinter.Button(button_bottom_frame, text='Register', command=sub_func_register)
+		register_button.grid(row=0, column=1)
+
+		log_in_toplevel.mainloop()
 
 
 	def create_base_frames(self):
@@ -243,5 +328,5 @@ class ClientGui:
 
 # TODO - Dropdown for activeclientlist
 
-test = ClientGui()
+test = ClientGui('127.0.0.1', 9999)
 test.start()
