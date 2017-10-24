@@ -9,6 +9,7 @@ class Sender(threading.Thread):
 
     def run(self):
         while True:
+            ##Ta bort input när GUI ska kopplas
             self.message = input()
             self.client_socket.send(str.encode(self.message))
 
