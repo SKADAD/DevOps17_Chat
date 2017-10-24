@@ -13,6 +13,7 @@ class Receiver(threading.Thread):
             message_from_server=self.client_socket.recv(self.recv_size).decode()
 
             if message_from_server[:1] =="#":
+                # Commands from server in form of #
                 message=message_from_server[1:]
                 Commands(message)
                 print ("We got an server command!")

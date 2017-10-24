@@ -7,7 +7,7 @@ class Commands:
 
     def commands(self):
 
-        #Update users online OBS O TESTAT!
+        #Update users online OBS O TESTAT!!
         if self.message[:9]== "connected":
             print("Här updaterar vi listan med connected users")
             connectedusers=self.message[9:]

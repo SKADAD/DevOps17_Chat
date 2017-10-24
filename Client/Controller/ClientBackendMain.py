@@ -26,6 +26,6 @@ class ClientBackend:
 
 
 
-##Test objekt till klassen ska bort i finalrelease
+##Test objekt till klassen ska bort i finalrelease.
 test=ClientBackend('172.20.201.234',9999,"Tets")
 test.start()

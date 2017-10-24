@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b7ed99cd-538a-4129-b3d8-66b113d3972b" name="Default" comment="">
+    <list default="true" id="b7ed99cd-538a-4129-b3d8-66b113d3972b" name="Default" comment="Added in ClientCommands if you send #connected Kim Nabil Jens Mr.Brymer it should add that to connected clients list in client GUI &#10;UNTESTED!">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/Controller/ClientBackendMain.py" afterPath="$PROJECT_DIR$/Client/Controller/ClientBackendMain.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/Controller/ClientCommands.py" afterPath="$PROJECT_DIR$/Client/Controller/ClientCommands.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/Controller/ClientReceiveClass.py" afterPath="$PROJECT_DIR$/Client/Controller/ClientReceiveClass.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,7 +26,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ClientSendClass.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ClientBackendMain.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/Controller/ClientBackendMain.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="28" column="51" lean-forward="false" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClientSendClass.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Client/Controller/ClientSendClass.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
@@ -36,8 +51,8 @@
       <file leaf-file-name="ClientReceiveClass.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Client/Controller/ClientReceiveClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
+            <state relative-caret-position="255">
+              <caret line="15" column="51" lean-forward="false" selection-start-line="15" selection-start-column="51" selection-end-line="15" selection-end-column="51" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -57,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientCommands.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ClientCommands.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Client/Controller/ClientCommands.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="21" lean-forward="false" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+            <state relative-caret-position="153">
+              <caret line="9" column="43" lean-forward="false" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -138,14 +153,14 @@
         <option value="$PROJECT_DIR$/ClientGuiDesignClass.py" />
         <option value="$PROJECT_DIR$/Client/View.py" />
         <option value="$PROJECT_DIR$/Server/Controller/ServerBackendMain.py" />
-        <option value="$PROJECT_DIR$/Client/Controller/ClientBackendMain.py" />
-        <option value="$PROJECT_DIR$/Client/Controller/ClientReceiveClass.py" />
         <option value="$PROJECT_DIR$/Client/Controller/ClientMain.py" />
         <option value="$PROJECT_DIR$/Client/View/ClientGuiFunctions.py" />
         <option value="$PROJECT_DIR$/Client/Controller/ClientSendClass.py" />
         <option value="$PROJECT_DIR$/Client/View/Log_in_GUI.py" />
         <option value="$PROJECT_DIR$/Client/View/ClientGuiDesignClass.py" />
         <option value="$PROJECT_DIR$/Client/Controller/ClientCommands.py" />
+        <option value="$PROJECT_DIR$/Client/Controller/ClientBackendMain.py" />
+        <option value="$PROJECT_DIR$/Client/Controller/ClientReceiveClass.py" />
       </list>
     </option>
   </component>
@@ -565,7 +580,14 @@
       <option name="project" value="LOCAL" />
       <updated>1508841833988</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Added in ClientCommands if you send #connected Kim Nabil Jens Mr.Brymer it should add that to connected clients list in client GUI &#10;UNTESTED!">
+      <created>1508841850849</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1508841850849</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -794,26 +816,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/Controller/ClientBackendMain.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="12" lean-forward="true" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/Controller/ClientReceiveClass.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/View/ClientGuiDesignClass.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
@@ -840,18 +842,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/Controller/ClientSendClass.py">
+    <entry file="file://$PROJECT_DIR$/Client/Controller/ClientCommands.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="47" lean-forward="false" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
+        <state relative-caret-position="153">
+          <caret line="9" column="43" lean-forward="false" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/Controller/ClientCommands.py">
+    <entry file="file://$PROJECT_DIR$/Client/Controller/ClientBackendMain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="51" lean-forward="false" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/Controller/ClientReceiveClass.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="15" column="21" lean-forward="false" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+          <caret line="15" column="51" lean-forward="false" selection-start-line="15" selection-start-column="51" selection-end-line="15" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/Controller/ClientSendClass.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="47" lean-forward="false" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
           <folding />
         </state>
       </provider>
