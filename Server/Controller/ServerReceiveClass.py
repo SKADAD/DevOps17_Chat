@@ -1,13 +1,16 @@
 import threading
 from Server.Controller.ServerCommands import Commands
 from Server.Controller.ServerBroadcastClass import Broadcast
-
+from Server.View.ServerGuiFunctions import print_message_in_text_frame
+from Server.View import  ServerGuiFunctions
+#from Server.View.ServerGuiDesignClass import ServerGui
 
 class ReceiveServer(threading.Thread):
-    def __init__(self,client_socket_,connected_clients_):
+    def __init__(self,client_socket_,connected_clients_,gui_root_):
         threading.Thread.__init__(self)
         self.client_socket = client_socket_
         self.connected_clients = connected_clients_
+        self.gui_root = gui_root_
         self.recv_size = 1024
 
     def run(self):
@@ -19,3 +22,5 @@ class ReceiveServer(threading.Thread):
             else:
                 broadcast_to_all.start()
                 print(broadcast_to_all.message_to_broadcast)
+                ServerGuiFunctions.print_message_in_text_frame(broadcast_to_all.message_to_broadcast,self.gui_root)
+

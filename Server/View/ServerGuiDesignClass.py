@@ -9,10 +9,10 @@ from Server.Controller.ServerBackendMain import ServerBackend
 
 class ServerGui:
 
-    def __init__(self, clients_ip_, clients_port_, user_name_):
-        self.clients_ip = clients_ip_
-        self.clients_port = clients_port_
-        self.user_name = user_name_
+    def __init__(self):
+        #self.clients_ip = clients_ip_
+        #self.clients_port = clients_port_
+        #self.user_name = user_name_
 
         self.root = tkinter.Tk()
 
@@ -53,9 +53,10 @@ class ServerGui:
         self.chat_frame_create()
         #self.server_info()
         print("Innan serverback end")
-        s = ServerBackend('', 9999)
+        self.server_start = ServerBackend('', 9999,self.chat_window)
+
         print("i mellan")
-        s.start()
+        self.server_start.start()
         print("efter")
         self.root.mainloop()
 
@@ -83,12 +84,17 @@ class ServerGui:
             if message.isspace() or len(message) == 0:
                 self.input_window.delete('1.0', 'end')
             else:
+                #s = ServerBackend()
+
+                ServerBackend.server_send(self.server_start, message)
+                #ServerBackend.server_receive(self.server_start, )
+
+
                 ServerGuiFunctions.print_message_in_text_frame(message, self.chat_window)
                 self.input_window.delete('1.0', 'end')
 
         def send_with_enter(event):
             get_message_from_input_window()
-            ServerBackend.server_send()
             return 'break'
 
         def new_line(event):
@@ -100,6 +106,8 @@ class ServerGui:
 
         self.input_window.place(x=20, y=530, width=600, height=90)
 
+
+        get_message_from_input_window() #testing
         send_image = tkinter.PhotoImage(file='../../images/button_send.png')
         send_button = tkinter.Button(self.root, image=send_image, command = get_message_from_input_window) #Glöm ej ändra funktion
         send_button.image = send_image
@@ -112,5 +120,5 @@ class ServerGui:
 
 
 
-test = ServerGui('16', '16', 'Kim')
+test = ServerGui()
 test.start()
