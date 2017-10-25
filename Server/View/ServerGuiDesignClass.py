@@ -88,6 +88,7 @@ class ServerGui:
 
         def send_with_enter(event):
             get_message_from_input_window()
+            ServerBackend.server_send()
             return 'break'
 
         def new_line(event):
