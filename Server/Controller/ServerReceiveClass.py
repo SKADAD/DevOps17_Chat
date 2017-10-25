@@ -1,5 +1,5 @@
 import threading
-
+from Server.Controller.ServerCommands import Commands
 from Server.Controller.ServerBroadcastClass import Broadcast
 
 
@@ -13,5 +13,9 @@ class ReceiveServer(threading.Thread):
     def run(self):
         while True:
             broadcast_to_all = Broadcast(self.client_socket,self.connected_clients,self.client_socket.recv(self.recv_size).decode())
-            broadcast_to_all.start()
-            print(broadcast_to_all.message_to_broadcast)
+            if broadcast_to_all.message_to_broadcast[:1] == "#":
+                Commands(broadcast_to_all.message_to_broadcast)
+                print("We got a command for the server")
+            else:
+                broadcast_to_all.start()
+                print(broadcast_to_all.message_to_broadcast)

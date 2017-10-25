@@ -3,6 +3,7 @@ import time
 import tkinter.messagebox
 from Server.View import ServerGuiFunctions
 #import ServerGuiFunctions
+from Server.Controller.ServerBackendMain import ServerBackend
 
 
 
@@ -51,21 +52,13 @@ class ServerGui:
         self.chat_input_frame()
         self.chat_frame_create()
         #self.server_info()
-
+        print("Innan serverback end")
+        s = ServerBackend('', 9999)
+        print("i mellan")
+        s.start()
+        print("efter")
         self.root.mainloop()
-    '''
-    def server_info(self):
-        server_uptime = 0
-        server_runtime = tkinter.Text(self.root)
-        server_runtime.insert('insert', server_uptime)
-        server_runtime.place(x=650, y=50)
 
-        while True:
-            server_runtime.delete('1.0', 'end')
-            server_uptime = server_uptime + 1
-            time.sleep(1)
-            server_runtime.insert('insert', server_uptime)
-    '''
 
     def logo_create(self):
         logo_image = tkinter.PhotoImage(file = '../../images/Gone_Logo.png')

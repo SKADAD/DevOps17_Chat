@@ -6,6 +6,7 @@ from Server.Controller.ServerSendClass import SendServer
 class ServerBackend:
     def __init__(self, ip_, port_):
         # declare variables for the class and creating a socket and a list
+
         self.main_server_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         self.ip = ip_
         self.port = port_
@@ -13,6 +14,7 @@ class ServerBackend:
         self.connected_clients = []
 
     def start(self):
+
         # starting the class which make the server to start listen and wait for clients to connect.
         self.server_send()
         self.main_server_socket.listen()
@@ -30,5 +32,5 @@ class ServerBackend:
 
 
 # trying the class
-obj1 = ServerBackend('172.20.201.234', 9999)
-obj1.start()
+#obj1 = ServerBackend('172.20.201.234', 9999)
+#obj1.start()
