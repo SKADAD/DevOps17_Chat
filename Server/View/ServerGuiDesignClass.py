@@ -7,15 +7,14 @@ from Server.Controller.ServerBackendMain import ServerBackend
 
 
 
-class ServerGui:
+class ServerGui():
 
-    def __init__(self):
+    def __init__(self,port_):
         #self.clients_ip = clients_ip_
         #self.clients_port = clients_port_
         #self.user_name = user_name_
-
+        self.port = port_
         self.root = tkinter.Tk()
-
         self.root.title('GONE CHAT - SERVER')
         self.root.iconbitmap(default='../../images/ikon.ico')
         self.root.configure(bg='ivory2')
@@ -39,27 +38,22 @@ class ServerGui:
         #self.send_button.place(x = 630, y = 530, width = 90, height = 90)
         self.server_info.place(x = 630, y = 30, width = 300, height = 70)
         self.server_list.place(x = 730, y = 110, width = 200, height = 510)
-
+        
         # Text widgets created
         self.chat_window = tkinter.Text(self.chat_window, wrap=tkinter.WORD)
         self.send_message_frame = tkinter.Frame(self.chat_entry_frame)
         self.input_window = tkinter.Text(self.root, width=50, height=3, borderwidth=2, wrap=tkinter.WORD)
-
-
     def start(self):
-
         self.logo_create()
         self.chat_input_frame()
         self.chat_frame_create()
         #self.server_info()
         print("Innan serverback end")
-        self.server_start = ServerBackend('', 9999,self.chat_window)
-
+        self.server_start = ServerBackend('',int(self.port),self.chat_window)
         print("i mellan")
         self.server_start.start()
         print("efter")
         self.root.mainloop()
-
 
     def logo_create(self):
         logo_image = tkinter.PhotoImage(file = '../../images/Gone_Logo.png')
@@ -118,7 +112,3 @@ class ServerGui:
         print("Hello, world")
 #############
 
-
-
-test = ServerGui()
-test.start()

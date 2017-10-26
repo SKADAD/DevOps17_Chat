@@ -19,15 +19,8 @@ class ServerBackend(threading.Thread):
 
     def run(self):
         # starting the class which make the server to start listen and wait for clients to connect.
-        #new_thread = threading.Thread()
-        #new_thread.start()
-        #self.server_send()
-
         self.main_server_socket.listen()
-
-
         while True:
-
             client_socket, client_adress = self.main_server_socket.accept()
             self.connected_clients.append(client_socket)
             print("Someone connected to server")
