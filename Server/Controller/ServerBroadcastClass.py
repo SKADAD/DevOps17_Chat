@@ -9,4 +9,7 @@ class Broadcast(threading.Thread):
 
     def run(self):
          for client in self.connected_clients:
-            client.send(str.encode(self.message_to_broadcast))
+             if client == self.client_socket:
+                 pass
+             else:
+                client.send(str.encode(self.message_to_broadcast))

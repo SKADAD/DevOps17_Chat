@@ -1,4 +1,4 @@
-from Client.View.ClientGuiDesignClass import ClientGui
+#from Client.View.ClientGuiDesignClass import ClientGui
 
 class Commands:
     def __init__(self,message_from_server_):

@@ -2,6 +2,9 @@ import tkinter
 import tkinter.messagebox
 
 from Client.View import ClientGuiFunctions
+from Client.Controller import ClientBackendMain
+
+
 
 
 class ClientGui:
@@ -53,13 +56,15 @@ class ClientGui:
 
 	def start(self):
 		# Start connection with server
+		self.connection=ClientBackendMain.ClientBackend(self.servers_ip,self.servers_port,self.chat_window)
+		self.connection.start()
 		self.create_base_frames()
 		self.top_left_frame_create()
 		self.top_right_frame_create()
 		self.center_left_frame_create()
 		self.center_right_frame_create()
 		self.bottom_frame_create()
-		self.log_in_frame()
+		#self.log_in_frame()
 		self.root.mainloop()
 
 	def log_in_frame(self):
@@ -296,8 +301,9 @@ class ClientGui:
 			if message.isspace() or len(message) == 0:
 				self.input_window.delete('1.0', 'end')
 			else:
-				#ClientGuiFunctions.send_message()
-				ClientGuiFunctions.print_message_in_text_frame(message, self.chat_window)
+
+				ClientGuiFunctions.print_message_in_text_frame_right(message, self.chat_window)
+				ClientBackendMain.ClientBackend.server_send(self.connection, message)
 				self.input_window.delete('1.0', 'end')
 
 		def get_message_from_input_window_with_enter(event):
@@ -328,5 +334,5 @@ class ClientGui:
 
 # TODO - Dropdown for activeclientlist
 
-test = ClientGui('127.0.0.1', 9999)
-test.start()
+# test = ClientGui('127.0.0.1', 9999)
+# test.start()

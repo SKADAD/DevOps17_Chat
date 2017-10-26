@@ -90,7 +90,7 @@ class ServerGui:
                 #ServerBackend.server_receive(self.server_start, )
 
 
-                ServerGuiFunctions.print_message_in_text_frame(message, self.chat_window)
+                ServerGuiFunctions.print_message_in_text_frame_right(message, self.chat_window)
                 self.input_window.delete('1.0', 'end')
 
         def send_with_enter(event):

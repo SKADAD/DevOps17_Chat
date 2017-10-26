@@ -3,6 +3,7 @@ import time
 import tkinter.messagebox
 
 from Client.View.ClientGuiDesignClass import ClientGui
+from Client.Controller.ClientBackendMain import ClientBackend
 
 class Login:
 
@@ -14,6 +15,7 @@ class Login:
 
 	def start(self):
 		def sub_func_set_ip_and_port():
+
 
 			ip_entered = ip_entry.get()
 			port_entered = port_entry.get()
@@ -52,5 +54,12 @@ class Login:
 
 	def start_gui_main(self):
 		self.choose_ip_and_port_root.destroy()
-		new_gui = ClientGui(self.ip, self.port)
+		#new_connection = ClientBackend(self.ip, self.port)
+		new_gui = ClientGui(self.servers_ip, self.servers_port)
 		new_gui.start()
+		#new_connection.start()
+
+
+
+d=Login()
+d.start()
