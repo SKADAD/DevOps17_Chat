@@ -49,14 +49,16 @@ class ClientGui:
 		self.chat_window = tkinter.Text(self.center_left_frame, wrap=tkinter.WORD, font=(self.font, 12))
 		self.send_message_frame = tkinter.Frame(self.bottom_frame)
 		self.input_window = tkinter.Text(self.send_message_frame, width=50, height=3, borderwidth=2, wrap=tkinter.WORD, relief='ridge', font=(self.font, 12))
+		self.input_window = tkinter.Text(self.send_message_frame, width=50, height=3, borderwidth=2, wrap=tkinter.WORD, relief='ridge', font=(self.font, 12))
+		self.active_user_list = tkinter.Listbox(self.center_right_frame, font=(self.font, 12))
 
 
 
-		self.list_of_active_users = ['Kim', 'Nabil','Peter']
+		self.list_of_active_users=[]
 
 	def start(self):
 		# Start connection with server
-		self.connection=ClientBackendMain.ClientBackend(self.servers_ip,self.servers_port,self.chat_window)
+		self.connection = ClientBackendMain.ClientBackend(self.servers_ip,self.servers_port,self.chat_window,self.active_user_list)
 		self.connection.start()
 		self.create_base_frames()
 		self.top_left_frame_create()
@@ -256,13 +258,14 @@ class ClientGui:
 			self.input_window.delete('1.0', 'end')
 			self.input_window.insert('1.0', '@{} '.format(chosen_user))
 
-		active_user_list = tkinter.Listbox(self.center_right_frame, font=(self.font, 12))
-		active_user_list.grid(row=0, column=0, sticky='nswe')
+		#active_user_list = tkinter.Listbox(self.center_right_frame, font=(self.font, 12))
+		self.active_user_list.grid(row=0, column=0, sticky='nswe')
 
-		active_user_list.bind('<Button-3>', send_private_message)
+		self.active_user_list.bind('<Button-3>', send_private_message)
+
 
 		for user in self.list_of_active_users:
-			active_user_list.insert('end', user)
+			self.active_user_list.insert('end', user)
 
 
 

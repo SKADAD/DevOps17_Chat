@@ -5,7 +5,7 @@ class Port_Window:
         self.root1 = tkinter.Tk()
         self.port_from_input = None
 
-    def test(self):
+    def start(self):
         def get_port():
             self.port_from_input = port_entry.get()
             print(self.port_from_input)
@@ -28,4 +28,4 @@ class Port_Window:
         new_gui = ServerGui(self.port_from_input)
         new_gui.start()
 start = Port_Window()
-start.test()
+start.start()

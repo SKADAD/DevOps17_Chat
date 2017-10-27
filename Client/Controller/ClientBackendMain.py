@@ -6,11 +6,12 @@ from Client.Controller.ClientCommands import Commands
 
 class ClientBackend(threading.Thread):
 
-    def __init__(self,server_ip_,server_port_,chat_window_):
+    def __init__(self,server_ip_,server_port_,chat_window_,active_users_list_,):
         threading.Thread.__init__(self)
         self.server_ip=server_ip_
         self.server_port=server_port_
         self.chat_window = chat_window_
+        self.active_users_list=active_users_list_
         self.client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
 
@@ -20,7 +21,7 @@ class ClientBackend(threading.Thread):
         self.client.connect((str(self.server_ip),int(self.server_port)))
 
         #Starting new thread to recive messages from server
-        receiver = Receiver(self.client,self.chat_window).start()
+        receiver = Receiver(self.client,self.chat_window,self.active_users_list).start()
 
 
 

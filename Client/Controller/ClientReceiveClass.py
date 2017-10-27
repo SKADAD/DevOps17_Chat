@@ -4,10 +4,11 @@ from Client.View import ClientGuiFunctions
 
 
 class Receiver(threading.Thread):
-    def __init__(self,client_socket_,chat_window_):
+    def __init__(self,client_socket_,chat_window_,active_users_list_):
         threading.Thread.__init__(self)
-        self.client_socket=client_socket_
-        self.chat_window=chat_window_
+        self.client_socket = client_socket_
+        self.chat_window = chat_window_
+        self.active_users_list = active_users_list_
         self.recv_size=1024
 
     def run(self):
@@ -17,7 +18,9 @@ class Receiver(threading.Thread):
             if message_from_server[:1] =="#":
                 # Commands from server in form of #
                 message=message_from_server[1:]
-                Commands(message)
+                if message[:9]== "connected":
+                    print("trying to update list")
+                    Commands(message,self.active_users_list).connected_users()
                 print ("We got an server command!")
 
             else:

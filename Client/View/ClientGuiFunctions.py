@@ -9,7 +9,9 @@ def print_message_in_text_frame(message, chat_window):
 	# Disables insert to chat_window
 	chat_window.configure(state="disabled")
 
-
+def listofusersupdate(list_of_active_users,active_user_list):
+    for user in list_of_active_users:
+        active_user_list.insert('end', user)
 
 def send_message(message):
 	pass
