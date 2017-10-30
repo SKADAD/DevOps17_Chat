@@ -21,10 +21,13 @@ class ServerBackend(threading.Thread):
         # starting the class which make the server to start listen and wait for clients to connect.
         self.main_server_socket.listen()
         while True:
-            client_socket, client_adress = self.main_server_socket.accept()
-            self.connected_clients.append(client_socket)
+            self.client_socket, self.client_adress = self.main_server_socket.accept()
+            self.connected_clients.append(self.client_socket)
             print("Someone connected to server")
-            self.server_receive(client_socket, self.connected_clients, self.chat_window)
+            try:
+                self.server_receive(self.client_socket, self.connected_clients, self.chat_window)
+            except:
+                SendServer(self.client_socket, "User disconnected").start()
 
     def server_send(self,message):
         SendServer(self.connected_clients,message).start()
