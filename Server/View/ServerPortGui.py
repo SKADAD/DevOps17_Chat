@@ -1,12 +1,18 @@
 import tkinter
+import socket
+import tkinter.messagebox
 from Server.View.ServerGuiDesignClass import ServerGui
 class Port_Window:
     def __init__(self):
         self.root1 = tkinter.Tk()
+        self.root1.title('Port/Login')
+        self.root1.iconbitmap('../../images/ikon.ico')
         self.port_from_input = None
+        self.root1.geometry("225x90")
+        self.root1.resizable(0,0)
 
     def start(self):
-        key = 'abcdefghijklmnopqrstuvwxyz'
+        key = 'abcdefghijklmnopqrstuvwdxyz'
         def encrypt():
 
             password = password_entry.get()
@@ -32,9 +38,13 @@ class Port_Window:
 
         def get_port():
             self.port_from_input = port_entry.get()
-            print(self.port_from_input)
-            self.start_gui_main()
-
+            port_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            try:
+                port_socket.bind(('', int(self.port_from_input)))
+                port_socket.close()
+                self.start_gui_main()
+            except:
+                tkinter.messagebox.showwarning(title='Error', message='Port is already taken')
 
         head_frame = tkinter.Frame(self.root1, bg="grey")
         head_frame.place()
@@ -48,7 +58,7 @@ class Port_Window:
         checknum_label.grid(row=2, column = 0)
         checknum_entry.grid(row=2, column = 1)
 
-        button = tkinter.Button(self.root1, text = "Login", command =encrypt)
+        button = tkinter.Button(self.root1, text = "Start server", command =encrypt)
         button.grid(row = 3, column = 0, columnspan = 2)
 
 
