@@ -1,10 +1,7 @@
 import tkinter
-import time
 import tkinter.messagebox
 from Server.View import ServerGuiFunctions
-#import ServerGuiFunctions
 from Server.Controller.ServerBackendMain import ServerBackend
-
 
 
 class ServerGui():
@@ -20,7 +17,7 @@ class ServerGui():
         self.root.configure(bg='ivory2')
         # width x height + x offset + y offset:
         self.root.geometry("1200x700+30+30")
-        self.root.minsize(width = 1200, height = 700)
+        self.root.minsize(width=1200, height=700)
 
         #Gui framwork
         self.logo_frame = tkinter.Frame(self.root, highlightbackground = 'black', highlightthickness= 2)
@@ -48,11 +45,9 @@ class ServerGui():
         self.chat_input_frame()
         self.chat_frame_create()
         #self.server_info()
-        print("Innan serverback end")
+        #starting server
         self.server_start = ServerBackend('',int(self.port),self.chat_window)
-        print("i mellan")
         self.server_start.start()
-        print("efter")
         self.root.mainloop()
 
     def logo_create(self):
@@ -61,15 +56,10 @@ class ServerGui():
         logo_label.image = logo_image
         logo_label.place(x = 20, y = 30, width = 300, height = 70)
 
-
-
-
     def chat_frame_create(self):
         self.chat_window.place(x = 0, y = 0, width = 695, height = 395)
         self.chat_window.see('end')
         self.chat_window.configure(state="disabled")
-
-
 
     def chat_input_frame(self):
 
@@ -78,12 +68,7 @@ class ServerGui():
             if message.isspace() or len(message) == 0:
                 self.input_window.delete('1.0', 'end')
             else:
-                #s = ServerBackend()
-
                 ServerBackend.server_send(self.server_start, message)
-                #ServerBackend.server_receive(self.server_start, )
-
-
                 ServerGuiFunctions.print_message_in_text_frame_right(message, self.chat_window)
                 self.input_window.delete('1.0', 'end')
 
@@ -97,7 +82,6 @@ class ServerGui():
         self.chat_entry_frame.place(x=20, y=530, width=600, height=90)
         self.input_window.bind('<Return>', send_with_enter)
         self.input_window.bind('<Shift-Return>', new_line)
-
         self.input_window.place(x=20, y=530, width=600, height=90)
 
 
@@ -106,9 +90,3 @@ class ServerGui():
         send_button = tkinter.Button(self.root, image=send_image, command = get_message_from_input_window) #Glöm ej ändra funktion
         send_button.image = send_image
         send_button.place(x=630, y=530, width=90, height=90)
-
-#############
-    def test_print(self):
-        print("Hello, world")
-#############
-

@@ -14,8 +14,8 @@ class ReceiveServer(threading.Thread):
         self.recv_size = 1024
 
     def run(self):
-        while True:
-            try:
+        try:
+            while True:
                 broadcast_to_all = Broadcast(self.client_socket,self.connected_clients,self.client_socket.recv(self.recv_size).decode())
                 if broadcast_to_all.message_to_broadcast[:1] == "#":
                     Commands(broadcast_to_all.message_to_broadcast)
@@ -24,8 +24,7 @@ class ReceiveServer(threading.Thread):
                     broadcast_to_all.start()
                     print(broadcast_to_all.message_to_broadcast)
                     ServerGuiFunctions.print_message_in_text_frame(broadcast_to_all.message_to_broadcast,self.chat_window)
-            except:
-                SendServer(self.connected_clients,"User disconnected").start()
-                self.client_socket.close()
-                self.connected_clients.remove(self.client_socket)
-                return
+        except:
+            self.connected_clients.remove(self.client_socket)
+            self.client_socket.close()
+            SendServer(self.connected_clients, "User disconnected").start()

@@ -7,9 +7,6 @@ class SendServer(threading.Thread):
         self.message_to_all = message_to_all_
 
     def run(self):
-        try:
-            for client in self.connected_clients:
-                client.send(str.encode(self.message_to_all))
-            print(self.message_to_all)
-        except:
-            print("Nobody is connected")
+        for client in self.connected_clients:
+             client.send(str.encode(self.message_to_all))
+        print(self.message_to_all)
