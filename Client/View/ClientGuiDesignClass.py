@@ -66,7 +66,7 @@ class ClientGui:
 		self.center_left_frame_create()
 		self.center_right_frame_create()
 		self.bottom_frame_create()
-		#self.log_in_frame()
+		self.log_in_frame()
 		self.root.mainloop()
 
 	def log_in_frame(self):
@@ -79,8 +79,6 @@ class ClientGui:
 				tkinter.messagebox.showwarning(title='Error', message='Fields cant be empty')
 			else:
 				sub_func_log_in(entered_login_name, entered_code)
-
-
 
 		def sub_func_register():
 			def sub_sub_func_close_window():
@@ -95,9 +93,14 @@ class ClientGui:
 				if (len(entered_user_name) == 0 or len(entered_user_nickname) == 0 or len(entered_user_code) == 0) or (entered_user_name.isspace() or entered_user_nickname.isspace() or entered_user_nickname.isspace()):
 					tkinter.messagebox.showwarning(title='Error', message='Fields cant be empty')
 				else:
-					result = ClientGuiFunctions.register_client_to_server(entered_user_name, entered_user_nickname, entered_user_code)
-					if result:
-						sub_func_log_in(entered_user_name, entered_user_code)
+					result = ClientGuiFunctions.register_client_to_server(self.connection, entered_user_name, entered_user_nickname, entered_user_code)
+					if result == 0:
+						self.user_name = entered_user_name
+						self.ip = 'test'
+						self.port = 'test'
+						log_in_toplevel.grab_release()
+						log_in_toplevel.withdraw()
+						log_in_toplevel.destroy()
 
 					elif result == -1:
 						tkinter.messagebox.showwarning(title='Error', message='Account with username {} already exists'.format(entered_user_name))
@@ -150,12 +153,22 @@ class ClientGui:
 				self.root.destroy()
 
 		def sub_func_log_in(login_name, code):
+			result = ClientGuiFunctions.log_in_client(self.connection, login_name, code)
 
-			# Check log in towards server
+			if result == 0:
+				log_in_toplevel.grab_release()
+				log_in_toplevel.withdraw()
+				log_in_toplevel.destroy()
 
-			log_in_toplevel.grab_release()
-			log_in_toplevel.withdraw()
-			log_in_toplevel.quit()
+			elif result == -1:
+				tkinter.messagebox.showwarning(title='Error',
+										   message='Wrong password')
+
+			elif result == -2:
+				tkinter.messagebox.showwarning(title='Error', message='Accountname unknown')
+
+
+
 
 		log_in_toplevel = tkinter.Toplevel(self.root)
 		log_in_toplevel.transient(self.root)
@@ -166,10 +179,10 @@ class ClientGui:
 		top_label = tkinter.Label(log_in_toplevel, text='Log in or register')
 		top_label.grid(row=0, column=0, columnspan=2)
 
-		log_in_name_label = tkinter.Label(log_in_toplevel, text='IP: ')
+		log_in_name_label = tkinter.Label(log_in_toplevel, text='Accountname: ')
 		log_in_name_entry = tkinter.Entry(log_in_toplevel)
 
-		code_label = tkinter.Label(log_in_toplevel, text='Port: ')
+		code_label = tkinter.Label(log_in_toplevel, text='Password: ')
 		code_entry = tkinter.Entry(log_in_toplevel)
 
 		log_in_name_label.grid(row=1, column=0)

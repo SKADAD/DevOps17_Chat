@@ -3,6 +3,7 @@ import threading
 from Client.Controller.ClientReceiveClass import Receiver
 from Client.Controller.ClientSendClass import Sender
 from Client.Controller.ClientCommands import Commands
+import time
 
 class ClientBackend(threading.Thread):
 
@@ -20,12 +21,10 @@ class ClientBackend(threading.Thread):
         #Connect to server
         self.client.connect((str(self.server_ip),int(self.server_port)))
 
-        #Starting new thread to recive messages from server
-        receiver = Receiver(self.client,self.chat_window,self.active_users_list).start()
 
-
-
-
+    def start_reciever(self):
+        # Starting new thread to recive messages from server
+        receiver = Receiver(self.client, self.chat_window, self.active_users_list).start()
 
     def server_send(self, message):
 

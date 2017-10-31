@@ -5,6 +5,7 @@ from Server.Controller.ServerSendClass import SendServer
 from Server.View import ServerGuiFunctions
 
 
+
 class ReceiveServer(threading.Thread):
     def __init__(self  , client_socket_, connected_clients_, chat_window_):
         threading.Thread.__init__(self)
