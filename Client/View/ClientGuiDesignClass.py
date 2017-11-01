@@ -5,9 +5,6 @@ import sys
 from Client.View import ClientGuiFunctions
 from Client.Controller import ClientBackendMain
 
-
-
-
 class ClientGui:
 
 	def __init__(self, ip, port):
@@ -54,10 +51,9 @@ class ClientGui:
 		self.input_window = tkinter.Text(self.send_message_frame, width=50, height=3, borderwidth=2, wrap=tkinter.WORD, relief='ridge', font=(self.font, 12))
 		self.active_user_list = tkinter.Listbox(self.center_right_frame, font=(self.font, 12))
 
-
-
 		self.list_of_active_users=[]
 		self.root.protocol('WM_DELETE_WINDOW', self.close_program)
+
 	def start(self):
 		# Start connection with server
 		self.connection = ClientBackendMain.ClientBackend(self.servers_ip,self.servers_port,self.chat_window,self.active_user_list)
@@ -171,8 +167,6 @@ class ClientGui:
 				tkinter.messagebox.showwarning(title='Error', message='Accountname unknown')
 
 
-
-
 		log_in_toplevel = tkinter.Toplevel(self.root)
 		log_in_toplevel.transient(self.root)
 		log_in_toplevel.attributes('-topmost', 'true')
@@ -250,7 +244,7 @@ class ClientGui:
 		change_userinfo_button.grid(row=3, column=0, pady=(10, 0), padx=10)
 
 		log_out_image=tkinter.PhotoImage(file='../../images/button_log-out.png')
-		log_out_button = tkinter.Button(user_info_frame, image=log_out_image, borderwidth=0, background='#3d85c6', activebackground='#3d85c6')
+		log_out_button = tkinter.Button(user_info_frame, image=log_out_image, borderwidth=0, background='#3d85c6', activebackground='#3d85c6', command=self.close_program)
 		log_out_button.image = log_out_image
 		log_out_button.grid(row=3, column=1, pady=(10, 0))
 
@@ -259,14 +253,6 @@ class ClientGui:
 		self.chat_window.see('end')
 		self.chat_window.configure(state="disabled")
 
-		'''
-		Scrollbar for view_widget. Saved for possible later implementation. If not implemented before release, delete this
-		
-		chat_window_scrollbar = tkinter.Scrollbar(self.chat_window)
-		chat_window_scrollbar.pack(side='right', fill='y')
-		
-		chat_window_scrollbar.config(command=self.chat_window.yview)
-		'''
 
 	def center_right_frame_create(self):
 		def send_private_message(event):
@@ -284,36 +270,7 @@ class ClientGui:
 			self.active_user_list.insert('end', user)
 
 
-
-
 	def bottom_frame_create(self):
-
-		'''
-			Functions and input_field for send_widget. Saved for possible change of input method. If not implemented before release, delete this
-
-		def sub_func_get_input():
-			message = str(input_user.get())
-			if len(message) == 0:
-				pass
-			else:
-				ClientGuiFunctions.print_message_in_text_frame(message, self.chat_window)
-				#input_field.delete(0, 'end')
-
-		def sub_func_bind_enter(event):
-			message = str(input_user.get())
-			if len(message) == 0:
-				pass
-			else:
-				ClientGuiFunctions.print_message_in_text_frame(message, self.chat_window)
-				#input_field.delete(0, 'end')
-
-
-		input_user = tkinter.StringVar()
-		input_field = tkinter.Entry(self.bottom_frame, text=input_user, highlightbackground='gray',highlightthickness=1)
-		input_field.bind("<Return>", sub_func_bind_enter)
-		input_field.grid(row=1, column=0, sticky='ew')
-		'''
-
 
 		def get_message_from_input_window():
 			message = self.input_window.get("1.0", 'end-1c')
@@ -338,14 +295,6 @@ class ClientGui:
 
 		self.input_window.grid(row=0, column=0, sticky='nswe')
 
-		'''
-		Scrollbar for send_widget. Saved for possible later implemention. If not implemented before release, delete this
-		message_send_scrollbar = tkinter.Scrollbar(input_window)
-		message_send_scrollbar.pack(side='right', fill='y')
-
-		input_window.configure(yscrollcommand=message_send_scrollbar.set)
-		message_send_scrollbar.config(command=input_window.yview)
-		'''
 		send_image = tkinter.PhotoImage(file='../../images/button_send.png')
 		send_button = tkinter.Button(self.bottom_frame, image=send_image, command=get_message_from_input_window, borderwidth=0)
 		send_button.image = send_image
