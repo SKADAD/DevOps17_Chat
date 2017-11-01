@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b7ed99cd-538a-4129-b3d8-66b113d3972b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Client/Controller/ClientCommands.py" afterPath="$PROJECT_DIR$/Client/Controller/ClientCommands.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/Controller/ServerBackendMain.py" afterPath="$PROJECT_DIR$/Server/Controller/ServerBackendMain.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/Controller/ServerReceiveClass.py" afterPath="$PROJECT_DIR$/Server/Controller/ServerReceiveClass.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -563,7 +560,14 @@
       <option name="project" value="LOCAL" />
       <updated>1508924241262</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="When clients type it adds clientname: Message&#10;And fixed so online clients shows up in the list">
+      <created>1509551431182</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1509551431183</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -657,7 +661,8 @@
     <MESSAGE value="Update, moving print things from server to client" />
     <MESSAGE value="Trying to connect the ServerBackend to Gui.&#10;Added servercommands file in controller" />
     <MESSAGE value="Update, nothing new" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update, nothing new" />
+    <MESSAGE value="When clients type it adds clientname: Message&#10;And fixed so online clients shows up in the list" />
+    <option name="LAST_COMMIT_MESSAGE" value="When clients type it adds clientname: Message&#10;And fixed so online clients shows up in the list" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
