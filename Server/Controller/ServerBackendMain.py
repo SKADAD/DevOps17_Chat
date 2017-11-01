@@ -19,13 +19,16 @@ class ServerBackend(threading.Thread):
         self.client_socket = None
         self.client_adress = None
         self.registered_users = []
+        self.clients_online=[]
 
     def run(self):
         # starting the class which make the server to start listen and wait for clients to connect.
         self.main_server_socket.listen()
+        users_online = threading.Thread(target=self.update_connected_users,).start()
+
         while True:
             self.client_socket, self.client_adress = self.main_server_socket.accept()
-            self.connected_clients.append(self.client_socket)
+            #self.connected_clients.append(self.client_socket)
             print("Someone connected to server")
             login_worker = threading.Thread(target=self.log_in_register, args=(self.client_socket, self.connected_clients, self.chat_window))
             login_worker.start()
@@ -79,10 +82,15 @@ class ServerBackend(threading.Thread):
                 print('Ogiltigt')
                 break
 
-        self.server_receive(client_socket, connected_clients, chat_window)
+        self.server_receive(client_socket, connected_clients, chat_window, credentials[2])
+        self.connected_clients.append(self.client_socket)
+        self.clients_online.append(credentials[2])
+        self.update_connected_users()
 
-    def server_receive(self, client_socket, connected_clients, chat_window):
-        ReceiveServer(client_socket, connected_clients, chat_window).start()
+
+
+    def server_receive(self, client_socket, connected_clients, chat_window, client_name,):
+        ReceiveServer(client_socket, connected_clients, chat_window, client_name,self.clients_online).start()
 
 
     def create_user_account(self, account_name, password, nickname):
@@ -111,4 +119,27 @@ class ServerBackend(threading.Thread):
                 return 'wrong password'
         else:
             return 'no account'
+
+    def update_connected_users(self):
+            online = "#connected"
+
+            for i in range(len(self.clients_online)):
+                online += " " + self.clients_online[i]
+
+            self.server_send(online)
+            print(online)
+
+
+
+
+
+
+
+    # def client_log_out(self, name):
+    #     self.clients_online.remove(name)
+
+        # for client in self.clients_online:
+        #     if self.clients_online[client]==name:
+        #         self.clients_online.pop(client)
+
 
