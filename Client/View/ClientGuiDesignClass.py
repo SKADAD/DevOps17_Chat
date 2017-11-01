@@ -1,5 +1,6 @@
 import tkinter
 import tkinter.messagebox
+import sys
 
 from Client.View import ClientGuiFunctions
 from Client.Controller import ClientBackendMain
@@ -12,9 +13,7 @@ class ClientGui:
 	def __init__(self, ip, port):
 		self.servers_ip = ip
 		self.servers_port = port
-		self.user_name = '1'
-		self.user_ip = '1'
-		self.user_port = '1'
+
 
 		self.root = tkinter.Tk()
 		self.root.title('GONE CHAT')
@@ -22,6 +21,9 @@ class ClientGui:
 		self.root.configure(bg='white')
 		self.root.minsize(width=800, height=600)
 
+		self.user_name = tkinter.StringVar()
+		self.user_ip = tkinter.StringVar()
+		self.user_port = tkinter.StringVar()
 
 		# Settings for self.root
 		self.root.columnconfigure(0, weight=2, minsize=200)
@@ -55,7 +57,7 @@ class ClientGui:
 
 
 		self.list_of_active_users=[]
-
+		self.root.protocol('WM_DELETE_WINDOW', self.close_program)
 	def start(self):
 		# Start connection with server
 		self.connection = ClientBackendMain.ClientBackend(self.servers_ip,self.servers_port,self.chat_window,self.active_user_list)
@@ -95,9 +97,10 @@ class ClientGui:
 				else:
 					result = ClientGuiFunctions.register_client_to_server(self.connection, entered_user_name, entered_user_nickname, entered_user_code)
 					if result == 0:
-						self.user_name = entered_user_name
-						self.ip = 'test'
-						self.port = 'test'
+						self.user_name.set(entered_user_name)
+						client_ip, client_port = self.connection.client.getsockname()
+						self.user_ip.set(client_ip)
+						self.user_port.set(client_port)
 						log_in_toplevel.grab_release()
 						log_in_toplevel.withdraw()
 						log_in_toplevel.destroy()
@@ -149,7 +152,7 @@ class ClientGui:
 		def sub_func_close_window():
 			close_program = tkinter.messagebox.askyesno(title='Close program', message='Closing this windows closes the program.\nDo you want to continue')
 			if close_program == True:
-				# close connection
+				self.connection.client.close()
 				self.root.destroy()
 
 		def sub_func_log_in(login_name, code):
@@ -226,11 +229,11 @@ class ClientGui:
 		user_info_frame.grid(row=0, column=0, ipadx=10)
 
 		user_label = tkinter.Label(user_info_frame, text='Username: ', justify='left', bg = '#3d85c6', fg='white', font=(self.font, 12))
-		username_label = tkinter.Label(user_info_frame, text=self.user_name, bg = '#3d85c6', fg='white', font=(self.font, 12))
+		username_label = tkinter.Label(user_info_frame, textvariable=self.user_name, bg = '#3d85c6', fg='white', font=(self.font, 12))
 		ip_label = tkinter.Label(user_info_frame, text='User IP: ', justify='left', bg = '#3d85c6', fg='white', font=(self.font, 12))
-		user_ip_label = tkinter.Label(user_info_frame, text=self.user_ip, bg = '#3d85c6', fg='white', font=(self.font, 12))
+		user_ip_label = tkinter.Label(user_info_frame, textvariable=self.user_ip, bg = '#3d85c6', fg='white', font=(self.font, 12))
 		port_label = tkinter.Label(user_info_frame, text='User Port: ', justify='left', bg = '#3d85c6', fg='white', font=(self.font, 12))
-		user_port_label = tkinter.Label(user_info_frame, text=self.user_port, anchor='w', bg = '#3d85c6', fg='white', font=(self.font, 12))
+		user_port_label = tkinter.Label(user_info_frame, textvariable=self.user_port, anchor='w', bg = '#3d85c6', fg='white', font=(self.font, 12))
 
 		user_label.grid(row=0, column=0, sticky='w', padx=10)
 		username_label.grid(row=0, column=1, sticky='w')
@@ -348,7 +351,7 @@ class ClientGui:
 		send_button.image = send_image
 		send_button.grid(row=1, column=0, sticky='e', padx=10, pady=10)
 
-# TODO - Dropdown for activeclientlist
-
-# test = ClientGui('127.0.0.1', 9999)
-# test.start()
+	def close_program(self):
+		self.connection.client.close()
+		self.root.destroy()
+		sys.exit()
