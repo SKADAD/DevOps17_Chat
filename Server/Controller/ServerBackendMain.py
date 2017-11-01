@@ -1,6 +1,7 @@
 import socket
 import threading
 import time
+import pickle
 from Server.Controller.ServerReceiveClass import ReceiveServer
 from Server.Controller.ServerSendClass import SendServer
 from Server.Model.UserClass import User
@@ -22,6 +23,7 @@ class ServerBackend(threading.Thread):
         self.clients_online=[]
 
     def run(self):
+        self.unpickle_user_account()
         # starting the class which make the server to start listen and wait for clients to connect.
         self.main_server_socket.listen()
         users_online = threading.Thread(target=self.update_connected_users,).start()
@@ -102,6 +104,7 @@ class ServerBackend(threading.Thread):
             if new_user.nickname == nickname.nickname:
                 return 'nickname exists'
         self.registered_users.append(new_user)
+        self.pickle_user_account()
         return 'account created'
 
 
@@ -129,13 +132,30 @@ class ServerBackend(threading.Thread):
             self.server_send(online)
             print(online)
 
+    def unpickle_user_account(self):
+        pickle_in = open("user_pickle.pickle", 'rb')
+        try:
+            while True:
+                self.registered_users.append(pickle.load(pickle_in))
+        except EOFError:
+            pass
+        pickle_in.close()
+
+    def pickle_user_account(self):
+        pickle_out = open("user_pickle.pickle", 'wb')
+        for user in range(len(self.registered_users)):
+            pickle.dump(self.registered_users[user], pickle_out)
+        pickle_out.close()
 
 
 
 
 
 
-    # def client_log_out(self, name):
+
+
+
+                # def client_log_out(self, name):
     #     self.clients_online.remove(name)
 
         # for client in self.clients_online:
