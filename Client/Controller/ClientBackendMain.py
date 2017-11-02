@@ -20,6 +20,7 @@ class ClientBackend(threading.Thread):
 
         #Connect to server
         self.client.connect((str(self.server_ip),int(self.server_port)))
+        print("Connection established")
 
 
     def start_reciever(self):

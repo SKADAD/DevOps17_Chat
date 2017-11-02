@@ -126,8 +126,8 @@ class ServerBackend(threading.Thread):
     def update_connected_users(self):
             online = "#connected"
 
-            for i in range(len(self.clients_online)):
-                online += " " + self.clients_online[i]
+            for client in self.clients_online:
+                online += " " + client
 
             self.server_send(online)
             print(online)

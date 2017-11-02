@@ -260,7 +260,7 @@ class ClientGui:
 			self.input_window.delete('1.0', 'end')
 			self.input_window.insert('1.0', '@{} '.format(chosen_user))
 
-		#active_user_list = tkinter.Listbox(self.center_right_frame, font=(self.font, 12))
+		active_user_list = tkinter.Listbox(self.center_right_frame, font=(self.font, 12))
 		self.active_user_list.grid(row=0, column=0, sticky='nswe')
 
 		self.active_user_list.bind('<Button-3>', send_private_message)

@@ -87,6 +87,6 @@ class ServerGui():
 
         get_message_from_input_window() #testing
         send_image = tkinter.PhotoImage(file='../../images/button_send.png')
-        send_button = tkinter.Button(self.root, image=send_image, command = get_message_from_input_window) #Glöm ej ändra funktion
+        send_button = tkinter.Button(self.root, image=send_image, command = get_message_from_input_window)
         send_button.image = send_image
         send_button.place(x=630, y=530, width=90, height=90)
